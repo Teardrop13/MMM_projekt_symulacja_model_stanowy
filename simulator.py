@@ -1,13 +1,11 @@
 import matplotlib.pyplot as plt
-import math # sinus ?
+import math
 
-n = 3 # parametr zadany
+n = 3 # parametr zadany, wielkosc macierzy
 
-
-t = 20 # czas symulacji
+t = 50 # czas symulacji
 dt = 0.001 # czas kroku
 step_count = int(t/dt) # liczba krokow
-
 
 A = [[-5, 1, 0], [-2, 0, 1], [-1, 0, 0]]
 B = [4, 2, 1] # czy jest jakas zaleznosc ze na ostatniej pozycji musi byc 1 ?
@@ -21,13 +19,20 @@ u_integral = 0 # zerowe warunki początkowe
 
 # całka wektora zmiennych stanu
 # zsumowane poprzednie stany
-# mozna dodac += nowy stan * dt
 x_integral = x.copy()
 
+# tworzenie wektora sygnalu zadanego
 for i in range(step_count):
 
-    if i > 100 and i < 1000:
-        u.append(10)
+    # if i*dt > 3 and i*dt < 8:
+    #     u.append(1)
+    # else:
+    #     u.append(0)
+
+    if i*dt > 3 and i*dt < 7:
+        u.append(1)
+    elif i*dt > 8 and i*dt < 25:
+        u.append(2)
     else:
         u.append(0)
 
@@ -39,14 +44,12 @@ for i in range(step_count):
 
 
 for current_step in range(0, step_count):
-    t.append(current_step*dt) # czas zaczynajac od 0
-    if current_step > 0:
-        # całka z u
-        # zerowe warunki poczatkowe stad i > 0
-        u_integral += u[current_step]*dt
+    t.append(current_step*dt)
 
-    # całkowanie x
-    # całkowanie wektora stanu
+    # całka z u
+    u_integral += u[current_step]*dt
+
+    # całka wektora stanu x
     for row in range(n):
         x_integral[row] += x[row]*dt
 
@@ -58,7 +61,7 @@ for current_step in range(0, step_count):
             x[row] +=  A[row][col] * x_integral[col]
         x[row] += B[row] * u_integral
 
-    y.append(x[0])
+    y.append(x[0]) # C = [1 0 0 0 ... ] wiec tylko zmienna stanu x0
 
 
 plt.plot(t, u, 'g')
