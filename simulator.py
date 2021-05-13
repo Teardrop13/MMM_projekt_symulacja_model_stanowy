@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 import math
+import simulator_gui
+from PyQt5.QtWidgets import QApplication
+from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 
 n = 3 # parametr zadany, wielkosc macierzy
 
@@ -8,9 +12,9 @@ dt = 0.001 # czas kroku
 step_count = int(t/dt) # liczba krokow
 
 A = [[-5, 1, 0], [-2, 0, 1], [-1, 0, 0]]
-B = [4, 2, 1] # czy jest jakas zaleznosc ze na ostatniej pozycji musi byc 1 ?
+B = [1, 1, 2] # czy jest jakas zaleznosc ze na ostatniej pozycji musi byc 1 ?
 
-x = [0, 0, 0] # zmienne stanu, macierz D=[0] więc 0 na poczatku ?
+x = [0, 0, 0] # zmienne stanu
 y = [] # wektor wyjściowy
 t = [] # os czasu
 u = [] # wektor wejsciowy
@@ -18,7 +22,6 @@ u = [] # wektor wejsciowy
 u_integral = 0 # zerowe warunki początkowe
 
 # całka wektora zmiennych stanu
-# zsumowane poprzednie stany
 x_integral = x.copy()
 
 # tworzenie wektora sygnalu zadanego
@@ -29,14 +32,14 @@ for i in range(step_count):
     # else:
     #     u.append(0)
 
-    if i*dt > 3 and i*dt < 7:
-        u.append(1)
-    elif i*dt > 8 and i*dt < 25:
-        u.append(2)
-    else:
-        u.append(0)
+    # if i*dt > 3 and i*dt < 7:
+    #     u.append(1)
+    # elif i*dt > 8 and i*dt < 25:
+    #     u.append(2)
+    # else:
+    #     u.append(0)
 
-    # u.append(1)
+    u.append(1)
 
     # u.append(math.sin(i*dt))
 
@@ -64,6 +67,18 @@ for current_step in range(0, step_count):
     y.append(x[0]) # C = [1 0 0 0 ... ] wiec tylko zmienna stanu x0
 
 
-plt.plot(t, u, 'g')
-plt.plot(t, y, 'r')
-plt.show()
+# plt.plot(t, u, 'g')
+# plt.plot(t, y, 'r')
+# plt.show()
+
+class Simulator(QtWidgets.QMainWindow, simulator_gui.Ui_Dialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+        self.show()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    form = Simulator()
+    form.show()
+    app.exec_()
