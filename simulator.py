@@ -4,6 +4,8 @@ import simulator_gui
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
 
 n = 3 # parametr zadany, wielkosc macierzy
 
@@ -75,7 +77,21 @@ class Simulator(QtWidgets.QMainWindow, simulator_gui.Ui_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.show()
+
+        # dodanie plot do QWidget plotArea
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure)
+        plot_box = QtWidgets.QVBoxLayout()
+        plot_box.addWidget(self.canvas)
+        self.plotArea.setLayout(plot_box)
+
+        # rysowanie czegokolwiek w plotArea
+        self.figure.clear()
+        ax = self.figure.add_subplot()
+        ax.plot(t, u, 'g')
+        ax.plot(t, y, 'r')
+        self.canvas.draw()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

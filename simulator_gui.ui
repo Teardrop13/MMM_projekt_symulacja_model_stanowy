@@ -344,6 +344,16 @@
     <double>10.000000000000000</double>
    </property>
   </widget>
+  <widget class="QWidget" name="plotArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>30</y>
+     <width>721</width>
+     <height>431</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -119,6 +119,9 @@ class Ui_Dialog(object):
         self.doubleSpinBox_stopTime.setSingleStep(1.0)
         self.doubleSpinBox_stopTime.setProperty("value", 10.0)
         self.doubleSpinBox_stopTime.setObjectName("doubleSpinBox_stopTime")
+        self.plotArea = QtWidgets.QWidget(Dialog)
+        self.plotArea.setGeometry(QtCore.QRect(550, 30, 721, 431))
+        self.plotArea.setObjectName("plotArea")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
