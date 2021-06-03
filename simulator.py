@@ -13,6 +13,17 @@ def createInputVector(type, time, dt, period, amplitude):
     step_count = int(time/dt)
     u = []
 
+    if (type=='sinus'):
+        for i in range(step_count):
+            u.append(amplitude*math.sin(step_count*period))
+    elif (type=='square'):
+        for i in range(step_count):
+            u.append(amplitude*1)
+    elif (type=='triangle'):
+        for i in range(step_count):
+           # u.append(amplitude*(1-(abs(step_count)/period)))
+            u.append(2*amplitude/math.pi*math.asin(math.sin((2*math.pi/period)*step_count)))
+
     return u
 
 def createTimeVector(time, dt):
@@ -50,6 +61,8 @@ def createMatrixB(parameters, n):
     for i, param in enumerate(parameters):
         B[i][0] = param
     return B
+
+
 
 
 class Model():
@@ -147,10 +160,10 @@ class Simulator(QtWidgets.QMainWindow, simulator_gui.Ui_Dialog):
 
 
         # do usuniecia:
-        step_count = int(time/dt)
-        u = []
-        for i in range(step_count):
-            u.append(1)
+        #step_count = int(time/dt)
+        #u = []
+        #for i in range(step_count):
+        #   u.append(1)
         # do usuniecia
 
 
@@ -174,7 +187,7 @@ class Simulator(QtWidgets.QMainWindow, simulator_gui.Ui_Dialog):
 
         A = createMatrixA(A_parameters, n)
         B = createMatrixB(B_parameters, n)
-        #u = createInputVector(signal_type, time, dt, period, amplitude)
+        u = createInputVector(signal_type, time, dt, period, amplitude)
         t = createTimeVector(time, dt)
         model = Model(A, B, n)
         y = model.simulation(u, t, dt)
