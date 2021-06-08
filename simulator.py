@@ -36,7 +36,7 @@ def createInputVector(type, time, dt, period, amplitude):
     elif (type=='step'):
         for i in range(step_count):
             u.append(amplitude)
-            
+
     return u
 
 def createTimeVector(time, dt):
@@ -74,8 +74,6 @@ def createMatrixB(parameters, n):
     for i, param in enumerate(parameters):
         B[i][0] = param
     return B
-
-
 
 
 class Model():
@@ -200,10 +198,6 @@ class Simulator(QtWidgets.QMainWindow, simulator_gui.Ui_Dialog):
         model = Model(A, B, n)
         y = model.simulation(u, t, dt)
         self.printMessage('symulacja gotowa')
-
-        print(u)
-        print(y)
-        print(t)
 
         # rysowanie wykresu
         self.figure.clear()
