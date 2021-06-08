@@ -36,7 +36,7 @@ def createInputVector(type, time, dt, period, amplitude):
     elif (type=='step'):
         for i in range(step_count):
             u.append(amplitude)
-
+            
     return u
 
 def createTimeVector(time, dt):
@@ -74,6 +74,8 @@ def createMatrixB(parameters, n):
     for i, param in enumerate(parameters):
         B[i][0] = param
     return B
+
+
 
 
 class Model():
