@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Symulator</string>
   </property>
   <widget class="QTextEdit" name="textEdit_matrixA">
    <property name="geometry">
@@ -60,7 +60,7 @@
      <x>20</x>
      <y>370</y>
      <width>201</width>
-     <height>111</height>
+     <height>171</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -88,6 +88,20 @@
      <widget class="QRadioButton" name="radioButton_triangle">
       <property name="text">
        <string>Trójkąt</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_ramp">
+      <property name="text">
+       <string>Rampa</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_step">
+      <property name="text">
+       <string>Skok</string>
       </property>
      </widget>
     </item>
@@ -288,10 +302,10 @@
     </rect>
    </property>
    <property name="decimals">
-    <number>2</number>
+    <number>4</number>
    </property>
    <property name="minimum">
-    <double>0.100000000000000</double>
+    <double>0.000100000000000</double>
    </property>
    <property name="maximum">
     <double>100.000000000000000</double>
@@ -312,6 +326,9 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="decimals">
+    <number>4</number>
+   </property>
    <property name="maximum">
     <double>20.000000000000000</double>
    </property>
@@ -331,8 +348,11 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="decimals">
+    <number>4</number>
+   </property>
    <property name="minimum">
-    <double>1.000000000000000</double>
+    <double>0.000100000000000</double>
    </property>
    <property name="maximum">
     <double>100.000000000000000</double>
